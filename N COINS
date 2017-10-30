@@ -1,0 +1,37 @@
+import java.util.*;
+import java.io.*;
+
+public class Ncoins {
+
+   public static int total;
+   public ArrayList<Integer> state=new ArrayList<Integer>();
+   
+   public static int Ncoins(int[] coins,int N){
+       if(N<0){
+       return 0;
+       }
+       if(coins.length==0){
+       return 0;
+       }
+   if(N==0){
+   total++;
+return 1;
+   }
+
+
+
+   int[] newcoins = Arrays.copyOfRange(coins, 1, coins.length);
+
+   return Ncoins(coins,N-coins[0])+Ncoins(newcoins,N);
+
+   
+   }
+    public static void main(String[] args) {
+        int N=5;
+       int[] coins = new int[]{1,2,3};
+        System.out.println(Ncoins(coins,N));
+       System.out.println(total);
+       
+    }
+    
+}
