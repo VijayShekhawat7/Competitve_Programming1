@@ -1,0 +1,130 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Nqueens {
+    private int n;
+    private int[] board;
+    private int flag;
+    private static int count=0;
+    public Nqueens(int n){
+        this.n=n;
+        this.board=new int[n];
+        flag=0;
+       
+        
+    }
+    
+    boolean isSafe(int row,int col){
+       
+       
+        if(board[col]!=-1){
+            // System.out.rintln("Queen Already in col");
+            return false;
+        }
+        for(int i=0;i<=col;i++){
+            if(board[i]==row){
+              //   System.out.println("Queens already in row");
+                return false;
+            }
+
+                if(row+i<n){
+                  if(board[col-i]==row+i){
+                   //    System.out.println("Queens in diagonal +1");
+                      return false;
+                  }  
+                }
+                if(row-i>=0){
+                    if(board[col-i]== row-i){
+                   //      System.out.println("Queens in diagonal -1");
+                        return false;
+                    }
+                    
+                }
+           
+        }
+        return true;
+
+        
+        
+    }
+    
+    void place(int row,int col){
+        board[col]=row;
+    }
+    
+    void remove(int col){
+        board[col]=-1;
+    }
+    void print(){
+       System.out.print("[");
+       for(int i=0;i<n;i++){
+           if(i!=n-1)
+           System.out.print(board[i]+1 + ",");
+           if(i==n-1)
+           System.out.print(board[i]+1);
+           
+          
+       }
+        System.out.print("]");
+         // System.out.println();
+    }
+    
+    void Queens(int num){
+        //System.out.println("Called Queens");
+        for(int i=0;i<n;i++){
+            board[i]=-1;
+        }
+        placehelper(board,0);
+        
+    }
+    
+    
+    void placehelper(int board[],int col){
+       //  System.out.println("Called placehelper");
+        if(col>=n){
+            //flag=1;
+           print();
+           count++;
+        }
+        else{   
+            for(int row=0;row <n;row++){
+                    if(isSafe(row,col)){
+            //choose
+
+                        place(row,col);
+ 
+                        placehelper(board,col+1);
+            //unchoose
+                        remove(col);
+                    }
+           
+                  
+                
+            }
+         
+           
+            
+            
+        }
+        
+        
+        
+    }
+    
+    
+	public static void main (String[] args) {
+		int T;
+		Scanner sc=new Scanner(System.in);
+		T=sc.nextInt();
+		while(T!=0){
+		    int num=sc.nextInt();
+		    Nqueens N=new Nqueens(num);
+		    N.Queens(num);
+                    System.out.println();
+                   System.out.println(count);
+		    
+		    T--;
+		}
+	}
+}
