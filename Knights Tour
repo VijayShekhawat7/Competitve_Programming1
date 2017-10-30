@@ -1,0 +1,124 @@
+@@ -0,0 +1,123 @@
+import java.io.*;
+import java.util.*;
+import java.text.DecimalFormat;
+
+public class KnightsTour {
+
+    public int[][] sol;
+    public int d;
+    public int t;
+    
+    public KnightsTour(int n){
+
+        sol=new int[n][n];
+        d=1;
+       t=n;
+    }
+    public void print(){
+    for(int i=0;i<t;i++){
+        for(int j=0;j<t;j++){
+            System.out.printf("%02d",sol[i][j]);
+            System.out.print(" ");
+        }
+        System.out.println();
+    
+    }
+    }
+    boolean isvalid(int row,int col){
+    if(row >= 0 && col >= 0 && row < t && col < t){
+        if(sol[row][col]==0){
+        return true;
+        }
+    }
+       return false;
+    }
+    public void tourhelper(int n){
+       sol[0][0]=1;
+       //d++;
+        
+    tour(0,0);
+    
+    }
+     
+    public void tour(int i,int j){
+ if(d==t*t){
+    print();
+    }
+    else{
+        
+    if(isvalid(i+2,j+1)){ 
+        d++;
+        sol[i+2][j+1]=d;
+        
+        tour(i+2,j+1);
+        d--;
+        sol[i+2][j+1]=0;
+    }
+    
+    if(isvalid(i+1,j+2)){
+        d++;
+        sol[i+1][j+2]=d;
+        tour(i+1,j+2);
+        d--;
+        sol[i+1][j+2]=0;
+    }
+    
+    if(isvalid(i-1,j+2)){
+        d++;
+     sol[i-1][j+2]=d;
+        tour(i-1,j+2);
+        d--;
+        sol[i-1][j+2]=0; 
+    }
+    if(isvalid(i-2,j+1)){
+        d++;
+     sol[i-2][j+1]=d;
+        tour(i-2,j+1);
+        d--;
+        sol[i-2][j+1]=0;
+    }
+    if(isvalid(i-2,j-1)){
+        d++;
+       sol[i-2][j-1]=d;
+        tour(i-2,j-1);
+        d--;
+        sol[i-2][j-1]=0;
+    
+    }
+    if(isvalid(i-1,j-2)){
+        d++;
+       sol[i-1][j-2]=d;
+        tour(i-1,j-2);
+        d--;
+        sol[i-1][j-2]=0;
+    }
+    if(isvalid(i+1,j-2)){
+        d++;
+       sol[i+1][j-2]=d;
+        tour(i+1,j-2);
+        d--;
+        sol[i+1][j-2]=0;
+    }
+    if(isvalid(i+2,j-1)){
+        d++;
+      sol[i+2][j-1]=d;
+        tour(i+2,j-1);
+        d--;
+        sol[i+2][j-1]=0;
+    }
+    
+    }
+    
+    }
+
+    public static void main(String[] args) {
+         int n=6;
+
+         KnightsTour K=new KnightsTour(n);
+         K.tourhelper(n);
+            
+        
+    }
+    
+}
