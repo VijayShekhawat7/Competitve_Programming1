@@ -1,0 +1,85 @@
+import java.util.*;
+import java.io.*;
+
+public class Combination {
+    
+    private final String s;
+    //private ArrayList<Strings> list=new ArrayList<Strings>();
+    //private boolean[] select;
+
+    
+    public Combination(String s){
+    this.s=s;
+    //this.select=new StringBuffer();
+   }
+    
+    public void getcom(){
+String select="";
+StringBuffer left=new StringBuffer();
+   left.append(s);
+    getcomhelper(left,select);
+    
+    }
+
+    public void getcomhelper(StringBuffer left,String select){
+       // System.out.println("select =" +select);
+      // System.out.println("left = " + left.toString());
+        if(left.length()==0){
+            System.out.println(select);
+        }
+        else{
+            
+            StringBuffer newleft=new StringBuffer();
+            newleft.append(left.toString());
+            if(newleft.length()>0){
+            newleft.deleteCharAt(0);
+           
+           //System.out.println("newLeft =" + newleft.toString());
+           // System.out.println("newSelect = " + select + left.charAt(0));
+           
+            getcomhelper(newleft,select + left.charAt(0));
+            getcomhelper(newleft,select);
+            
+            }
+        }
+        
+        }
+   
+        
+        
+    
+    
+    public String sort(String s){
+    
+        // convert input string to char array
+        char tempArray[] = s.toCharArray();
+         
+        // sort tempArray
+        Arrays.sort(tempArray);
+         
+        // return new sorted string
+        return new String(tempArray);
+    }
+        
+        
+    
+    
+
+    public static void main(String[] args) {
+       int T;
+      Scanner sc=new Scanner(System.in);
+       T=sc.nextInt();
+       String s;
+       s=sc.nextLine();
+       while(T!=0){
+           s=sc.nextLine();
+           char tempArray[] = s.toCharArray();
+            Arrays.sort(tempArray);
+            String str=new String(tempArray);
+           Combination combination=new Combination(str);
+           combination.getcom();
+           T--;
+       }
+       
+       }
+    }
